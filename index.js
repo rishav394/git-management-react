@@ -28,6 +28,7 @@ app.post('/commit', (req, res) => {
 	git.add('./*').commit([req.body.title, req.body.body], (err, x) => {
 		console.log(err, x);
 		res.send(err);
+		res.send(x);
 	});
 });
 
