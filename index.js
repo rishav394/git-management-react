@@ -27,9 +27,8 @@ app.get('/diff', (req, res) => {
 app.post('/commit', (req, res) => {
 	git.add('./*').commit([req.body.title, req.body.body], (err, x) => {
 		if (!err) {
-			res.status(200);
-		} else res.status(500);
-		res.sendStatus(500);
+			res.sendStatus(200);
+		} else res.sendStatus(500);
 	});
 });
 
