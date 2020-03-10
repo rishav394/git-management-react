@@ -26,8 +26,9 @@ app.get('/diff', (req, res) => {
 
 app.post('/commit', (req, res) => {
 	git.add('./*').commit([req.body.title, req.body.body], (err, x) => {
-		console.log(err, x);
-		res.send(x);
+		if (err) res.send(err);
+		if (x.summary.changes != 0) res.send(x);
+		else res.send('Nothing to commit');
 	});
 });
 
