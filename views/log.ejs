@@ -1,3 +1,40 @@
-<pre>
-<%= log %>
-</pre>
+<html>
+	<head>
+		<style>
+			table,
+			td,
+			tr,
+			th {
+				border: 1px solid;
+				border-collapse: collapse;
+				padding: 20px;
+			}
+
+			th {
+				text-transform: uppercase;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>hash</th>
+				<th>date</th>
+				<th>message</th>
+				<th>body</th>
+				<th>author_name</th>
+				<th>author_email</th>
+			</tr>
+			<% log.all.forEach(l => { %>
+			<tr>
+				<td><%= l.hash %></td>
+				<td><%= l.date %></td>
+				<td><%= l.message %></td>
+				<td><%= l.body %></td>
+				<td><%= l.author_name %></td>
+				<td><%= l.author_email %></td>
+			</tr>
+			<% }) %>
+		</table>
+	</body>
+</html>
