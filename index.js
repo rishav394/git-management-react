@@ -29,6 +29,7 @@ app.post('/commit', (req, res) => {
 		if (!err) {
 			res.status(200);
 		} else res.status(500);
+		res.sendStatus(500);
 	});
 });
 
