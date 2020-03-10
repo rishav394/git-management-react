@@ -28,7 +28,7 @@ app.post('/commit', (req, res) => {
 	git.add('./*').commit([req.body.title, req.body.body], (err, x) => {
 		if (!err) {
 			res.sendStatus(200);
-		} else res.sendStatus(500);
+		} else res.status(500).send(err);
 	});
 });
 
