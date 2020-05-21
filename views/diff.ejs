@@ -1,17 +1,114 @@
-<pre>
-<%= diff %>
-</pre>
+<html>
+  <head>
+    <style>
+      @font-face {
+        font-family: "ProximaNova-Regular";
+        src: url("https://utilize-app-static-assets.s3.amazonaws.com/fonts/ProximaNova-Regular.ttf")
+          format("truetype");
+        font-display: swap;
+      }
 
-<br />
-<br />
-<br />
+      @font-face {
+        font-family: "ProximaNova-Regular";
+        src: url("/ProximaNova-Regular.ttf") format("truetype");
+      }
 
-<form action="/commit" method="post">
-	<label for="title">Title</label>
-	<input type="text" name="title" id="title" required />
-	<br />
-	<label for="body">Description</label>
-	<textarea name="body" id="body" required></textarea>
-	<br />
-	<button>Commit</button>
-</form>
+      body {
+        font-family: "ProximaNova-Regular";
+      }
+
+      .right {
+        position: absolute;
+        top: 10%;
+        right: 10%;
+      }
+
+      td {
+        padding: 10px;
+      }
+
+      button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid rgb(102, 255, 0);
+        border-radius: 4px;
+      }
+
+      label {
+        font-size: 25px;
+      }
+
+      form {
+        border: 2px solid salmon;
+        width: 40%;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+      }
+
+      table {
+        margin: auto;
+      }
+
+      h1 {
+        border-bottom: 2px solid thistle;
+      }
+    </style>
+  </head>
+  <body>
+    <pre>
+			<%= diff %>
+		</pre
+    >
+
+    <br />
+    <br />
+    <br />
+
+    <form
+      style="text-align: center; padding: 10px;"
+      class="right"
+      action="/commit"
+      method="post"
+    >
+      <h1>Commit differences</h1>
+      <table>
+        <tr>
+          <td>
+            <label for="title">Title</label>
+          </td>
+          <td>
+            <input type="text" name="title" id="title" required />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="body">Description</label>
+          </td>
+          <td>
+            <textarea name="body" id="body" required></textarea>
+          </td>
+        </tr>
+      </table>
+      <br />
+      <br />
+      <button style="align-self: center; text-align: center;">Commit</button>
+    </form>
+  </body>
+</html>

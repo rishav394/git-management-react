@@ -3,6 +3,8 @@ const git = require("simple-git")();
 
 const app = express();
 
+let approvedHash = [];
+
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -12,10 +14,26 @@ app.use(
 
 app.set("view engine", "ejs");
 
+app.use(express.static("public"));
+
 app.get("/log", (req, res) => {
   git.log((err, log) => {
-    res.render("log", { log: log });
+    res.render("log", { log: log, admin: false, approve: approvedHash });
   });
+});
+
+app.get("/logadmin", (req, res) => {
+  git.log((err, log) => {
+    res.render("log", { log: log, admin: true, approve: approvedHash });
+  });
+});
+
+app.get("/approve/:hash", (req, res) => {
+  const hash = req.params.hash;
+  console.log(hash);
+
+  approvedHash.push(hash);
+  res.redirect("/logadmin");
 });
 
 app.get("/diff", (req, res) => {
@@ -32,6 +50,6 @@ app.post("/commit", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(1000, () => {
   console.log("Listening");
 });
