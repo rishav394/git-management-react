@@ -12,44 +12,36 @@ app.use(
   })
 );
 
-app.set("view engine", "ejs");
-
-app.use(express.static("public"));
-
 app.get("/log", (req, res) => {
   git.log((err, log) => {
-    res.render("log", { log: log, admin: false, approve: approvedHash });
+    res.status(200).json(log);
   });
 });
 
-app.get("/logadmin", (req, res) => {
-  git.log((err, log) => {
-    res.render("log", { log: log, admin: true, approve: approvedHash });
-  });
+app.get("/approvedHash", (req, res) => {
+  res.json(approvedHash);
 });
 
-app.get("/approve/:hash", (req, res) => {
+app.post("/approve/:hash", (req, res) => {
   const hash = req.params.hash;
-  console.log(hash);
-
   approvedHash.push(hash);
-  res.redirect("/logadmin");
+  res.json(approvedHash);
 });
 
 app.get("/diff", (req, res) => {
   git.diff([], (err, diff) => {
-    res.render("diff", { diff: diff });
+    res.send(diff);
   });
 });
 
 app.post("/commit", (req, res) => {
   git.add("./*").commit([req.body.title, req.body.body], (err, x) => {
-    if (err) res.send(err);
+    if (err) res.sendStatus(400);
     if (x.summary.changes != 0) res.send(x);
-    else res.send("Nothing to commit");
+    else res.status(400).send("Nothing to commit");
   });
 });
 
-app.listen(1000, () => {
-  console.log("Listening");
+app.listen(5000, () => {
+  console.log("Listening on port 5000");
 });
