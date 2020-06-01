@@ -4,8 +4,15 @@
   "main": "index.js",
   "author": "Rishav Rungta <rishav394@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsc && node build/index.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "simple-git": "^1.131.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "typescript": "^3.9.3"
   }
 }
