@@ -24,7 +24,9 @@ app.get("/approvedHash", (req, res) => {
 
 app.post("/approve/:hash", (req, res) => {
   const hash = req.params.hash;
-  approvedHash.push(hash);
+  if (!approvedHash.includes(hash)) {
+    approvedHash.push(hash);
+  }
   res.json(approvedHash);
 });
 

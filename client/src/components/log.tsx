@@ -45,12 +45,13 @@ class Log extends PureComponent<Props, State> {
 				<td>{commit.message}</td>
 				<td>{commit.body}</td>
 				<td>{commit.date}</td>
-				{this.props.isAdmin && (
-					<td>
+				{this.props.isAdmin ? (
+					<td style={{ margin: 'auto' }}>
 						<img
-							src="https://media.istockphoto.com/vectors/round-green-check-mark-thin-line-icon-button-tick-symbol-on-white-vector-id1141191243"
-							height="60px"
-							width="60px"
+							style={{ cursor: 'pointer' }}
+							src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png"
+							height="50px"
+							width="40px"
 							onClick={() => {
 								axios.post<string[]>(`/approve/${commit.hash}`).then((res) => {
 									const approvedHashes = res.data;
@@ -59,8 +60,13 @@ class Log extends PureComponent<Props, State> {
 									});
 								});
 							}}
+							alt={'Approve'}
 						/>
 					</td>
+				) : this.state.approvedHashes.includes(commit.hash) ? (
+					<td>Approved</td>
+				) : (
+					<td>Approval Pending</td>
 				)}
 			</tr>
 		));
@@ -75,7 +81,11 @@ class Log extends PureComponent<Props, State> {
 							<th>Message</th>
 							<th>Body</th>
 							<th>Date</th>
-							{this.props.isAdmin && <td>{'Approve'}</td>}
+							{this.props.isAdmin ? (
+								<th>{'Approve'}</th>
+							) : (
+								<th>{'Approval Status'}</th>
+							)}
 						</tr>
 					</thead>
 					<tbody>{trs}</tbody>
