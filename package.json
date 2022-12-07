@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "simple-git": "^1.131.0"
+    "simple-git": "^3.15.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.6",
